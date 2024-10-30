@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 50MB
+  #web:
+    #locale: pt-BR
+  messages:
+    basename: messages
+    encoding: UTF-8
+
+springdoc:
+  default-consumes-media-type: application/json
+
+server:
+  servlet:
+    context-path: /api/v1
+  port: 8089

@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5435/hackaton_fiap
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  sendgrid:
+    api-key: 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
+    from:
+      email: hernandes.andrade@hotmail.com
+
+application:
+  security:
+    jwt:
+      secret-key: LKM78NY5QWlJfAO8X2E4NE1QSlEWNURfQG9ZYXNKUXZfMTIz
+      expiration: 86400000
+  mailing:
+    frontend:
+      activation-url: http://192.168.1.6:8089/api/v1/auth/activate-account?token=
+      reset-password-url: http://192.168.1.6:4200/reset-password-url
