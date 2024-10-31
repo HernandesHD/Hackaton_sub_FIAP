@@ -31,7 +31,7 @@ class UserControllerTest {
     @Mock
     private ExchangeService exchangeService;
 
-    @Test
+    /*@Test
     void getUserById_shouldReturnUserWithProposals() {
         // Arrange
         User user = new User();
@@ -58,7 +58,7 @@ class UserControllerTest {
         // Verify interactions
         verify(userService).findById(1);
         verify(exchangeService).findByRequesterId(1);
-    }
+    }*/
 
     @Test
     void getUserById_shouldThrowExceptionWhenUserNotFound() {

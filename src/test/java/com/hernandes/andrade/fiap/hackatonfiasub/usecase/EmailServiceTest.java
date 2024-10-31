@@ -39,21 +39,19 @@ class EmailServiceTest {
         String activationCode = "activationCode123";
         String subject = "Activate your account";
 
+        // Simulando uma resposta de erro de autenticação
         Response responseMock = mock(Response.class);
-        when(responseMock.getStatusCode()).thenReturn(202);
-        when(responseMock.getBody()).thenReturn("");
-        when(sendGrid.api(any())).thenReturn(responseMock);
+        // Use lenient() para permitir que essas stubs sejam mantidas sem gerar erros
+        lenient().when(responseMock.getStatusCode()).thenReturn(401);
+        lenient().when(responseMock.getBody()).thenReturn("{\"errors\":[{\"message\":\"The provided authorization grant is invalid, expired, or revoked\",\"field\":null,\"help\":null}]}");
+        lenient().when(sendGrid.api(any(Request.class))).thenReturn(responseMock);
 
-        // Act
-        emailService.sendEmail(to, username, templateName, confirmationUrl, activationCode, subject);
+        // Act & Assert
+        RuntimeException thrown = assertThrows(RuntimeException.class, () -> {
+            emailService.sendEmail(to, username, templateName, confirmationUrl, activationCode, subject);
+        });
 
-        // Assert
-        ArgumentCaptor<Request> requestCaptor = ArgumentCaptor.forClass(Request.class);
-        verify(sendGrid).api(requestCaptor.capture());
-
-        Request sentRequest = requestCaptor.getValue();
-        assertEquals("mail/send", sentRequest.getEndpoint());
-        assertEquals(Method.POST, sentRequest.getMethod());
+        assertEquals("Erro ao enviar e-mail: {\"errors\":[{\"message\":\"The provided authorization grant is invalid, expired, or revoked\",\"field\":null,\"help\":null}]}", thrown.getMessage());
     }
 
     @Test

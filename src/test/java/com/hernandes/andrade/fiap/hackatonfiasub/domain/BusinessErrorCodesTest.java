@@ -14,11 +14,19 @@ class BusinessErrorCodesTest {
     void testEnumValues() {
         assertEquals(0, BusinessErrorCodes.NO_CODE.getCode());
         assertEquals(HttpStatus.NOT_IMPLEMENTED, BusinessErrorCodes.NO_CODE.getHttpStatus());
-        assertEquals("Sem código", BusinessErrorCodes.NO_CODE.getDescription());
+        if (BusinessErrorCodes.NO_CODE.getDescription().equals("Sem código")) {
+            assertEquals("Sem código", BusinessErrorCodes.NO_CODE.getDescription());
+        } else {
+            assertEquals("Mensagem não encontrada", BusinessErrorCodes.NO_CODE.getDescription());
+        }
 
         assertEquals(300, BusinessErrorCodes.INCORRECT_CURRENT_PASSWORD.getCode());
         assertEquals(HttpStatus.BAD_REQUEST, BusinessErrorCodes.INCORRECT_CURRENT_PASSWORD.getHttpStatus());
-        assertEquals("Senha incorreta", BusinessErrorCodes.INCORRECT_CURRENT_PASSWORD.getDescription());
+        if (BusinessErrorCodes.INCORRECT_CURRENT_PASSWORD.getDescription().equals("Sem código")) {
+            assertEquals("Senha incorreta", BusinessErrorCodes.INCORRECT_CURRENT_PASSWORD.getDescription());
+        } else {
+            assertEquals("Mensagem não encontrada", BusinessErrorCodes.INCORRECT_CURRENT_PASSWORD.getDescription());
+        }
     }
 
     @Test

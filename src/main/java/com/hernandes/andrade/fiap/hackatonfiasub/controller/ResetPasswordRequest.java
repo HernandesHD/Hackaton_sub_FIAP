@@ -2,7 +2,11 @@ package com.hernandes.andrade.fiap.hackatonfiasub.controller;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class ResetPasswordRequest {
 
     @NotEmpty(message = "The new password is not blank")

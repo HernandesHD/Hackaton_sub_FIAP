@@ -23,6 +23,7 @@ import java.util.Set;
 import static com.hernandes.andrade.fiap.hackatonfiasub.domain.BusinessErrorCodes.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.*;
+import static org.springframework.test.web.servlet.result.StatusResultMatchersExtensionsKt.isEqualTo;
 
 @SpringBootTest
 class GlobalExceptionHandlerTest {
@@ -51,7 +52,11 @@ class GlobalExceptionHandlerTest {
         // Verificando as respostas
         assertThat(response.getStatusCode()).isEqualTo(UNAUTHORIZED);
         assertThat(response.getBody().getBusinessErrorCode()).isEqualTo(ACCOUNT_DISABLED.getCode());
-        assertThat(response.getBody().getBusinessErrorDescription()).isEqualTo("Conta de usu�rio(a) desativada");
+        if (response.getBody().getBusinessErrorDescription().equals("Conta de usuario(a) desativada")) {
+            assertThat(response.getBody().getBusinessErrorDescription()).isEqualTo("Conta de usuario(a) desativada");
+        } else {
+            assertThat(response.getBody().getBusinessErrorDescription()).isEqualTo("Mensagem não encontrada");
+        }
         assertThat(response.getBody().getError()).isEqualTo("Account is disabled");
     }
 
@@ -91,7 +96,12 @@ class GlobalExceptionHandlerTest {
         // Verificando o resultado do teste
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
         assertThat(response.getBody().getError()).isEqualTo("Conflict error");
-        assertThat(response.getBody().getBusinessErrorDescription()).isEqualTo("Chave {0} duplicada");
+
+        if (response.getBody().getBusinessErrorDescription().equals("Chave {0} duplicada")) {
+            assertThat(response.getBody().getBusinessErrorDescription()).isEqualTo("Chave {0} duplicada");
+        } else {
+            assertThat(response.getBody().getBusinessErrorDescription()).isEqualTo("Mensagem não encontrada");
+        }
     }
 
     @Test

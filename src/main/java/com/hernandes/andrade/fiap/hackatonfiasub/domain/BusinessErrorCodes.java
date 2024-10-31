@@ -22,7 +22,6 @@ public enum BusinessErrorCodes {
 
     @Getter
     private final int code;
-    @Getter
     private final String description;
     @Getter
     private final HttpStatus httpStatus;

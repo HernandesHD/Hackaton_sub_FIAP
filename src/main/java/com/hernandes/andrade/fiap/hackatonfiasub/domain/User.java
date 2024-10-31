@@ -51,14 +51,14 @@ public class User implements UserDetails, Principal {
     private List<UserRole> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
-    private List<Game> games = new ArrayList<>();
+    private final List<Game> games = new ArrayList<>();
 
     @OneToMany(mappedBy = "requester", fetch = FetchType.LAZY)
-    private List<ExchangeProposal> proposals = new ArrayList<>();
+    private final List<ExchangeProposal> proposals = new ArrayList<>();
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     @JsonBackReference // Marca a referência inversa
-    private List<ExchangeProposal> ownedProposals = new ArrayList<>();
+    private final List<ExchangeProposal> ownedProposals = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

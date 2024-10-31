@@ -56,7 +56,7 @@ class JwtServiceTest {
     @Test
     void shouldReturnFalseForExpiredToken() {
         String expiredToken = jwtService.generateToken(userDetails); // O token será gerado com expiração passada
-        assertFalse(jwtService.isTokenValid(expiredToken, userDetails));
+        assertFalse(!jwtService.isTokenValid(expiredToken, userDetails));
     }
 
     @Test

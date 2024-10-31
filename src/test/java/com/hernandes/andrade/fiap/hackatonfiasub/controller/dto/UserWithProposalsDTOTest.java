@@ -20,7 +20,7 @@ class UserWithProposalsDTOTest {
         user.setId(1);
         user.setName("John Doe");
         user.setEmail("john@example.com");
-        user.setProposals(Collections.emptyList()); // Se necessário, adicione propostas
+        //user.setProposals(Collections.emptyList()); // Se necessário, adicione propostas
 
         UserWithProposalsDTO dto = UserWithProposalsDTO.fromEntity(user);
 
